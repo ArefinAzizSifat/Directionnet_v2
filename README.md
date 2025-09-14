@@ -18,9 +18,11 @@ To reproduce results and run the code, follow these steps:
 1. **Create a new conda environment (Python 3.10.18 recommended):**
    ```bash
    conda create -n <your_env_name> python=3.10.18
-2.	**Activate the environment**
+2.	**Activate the environment:**
+   ```bash
    conda activate <your_env_name>
-3.	**Install dependencies**
+4.	**Install dependencies**
+   ```bash
    pip install tensorflow==2.15.1
    pip install keras==2.15.0
    pip install tensorflow-addons==0.23.0
@@ -28,6 +30,7 @@ To reproduce results and run the code, follow these steps:
    pip install tensorflow-graphics==2021.12.3
 
 # Install additional packages
+   ```bash
    pip install -r requirements.txt
 
 
