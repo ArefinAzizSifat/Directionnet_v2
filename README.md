@@ -17,5 +17,17 @@ To reproduce results and run the code, follow these steps:
 
 1. **Create a new conda environment (Python 3.10.18 recommended):**
    ```bash
-   conda create -n directionnet_tf2 python=3.10.18
-   conda activate directionnet_tf2
+   conda create -n <your_env_name> python=3.10.18
+2.	**Activate the environment**
+   conda activate <your_env_name>
+3.	**Install dependencies**
+   pip install tensorflow==2.15.1
+   pip install keras==2.15.0
+   pip install tensorflow-addons==0.23.0
+   pip install tensorflow-probability==0.23.0
+   pip install tensorflow-graphics==2021.12.3
+
+# Install additional packages
+   pip install -r requirements.txt
+
+
