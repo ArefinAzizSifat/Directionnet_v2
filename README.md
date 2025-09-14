@@ -21,7 +21,8 @@ To reproduce results and run the code, follow these steps:
 2.	**Activate the environment:**
    ```bash
    conda activate <your_env_name>
-4.	**Install dependencies**
+
+3. **Install dependencies:**
    ```bash
    pip install tensorflow==2.15.1
    pip install keras==2.15.0
@@ -29,7 +30,7 @@ To reproduce results and run the code, follow these steps:
    pip install tensorflow-probability==0.23.0
    pip install tensorflow-graphics==2021.12.3
 
-# Install additional packages
+# **Install additional packages**
    ```bash
    pip install -r requirements.txt
 
