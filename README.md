@@ -38,3 +38,10 @@ conda activate <your_env_name>
    pip install -r requirements.txt
 ````
 
+---
+
+## 🚧 Status
+
+This repository is **actively under development** 🛠️✨  
+I continually update the code, improve the documentation, and add new features.  
+Stay tuned for more updates! 🔥📌
