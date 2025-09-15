@@ -1,30 +1,30 @@
-# DirectionNet (TensorFlow 2.x Implementation)
+# 📸 DirectionNet (TensorFlow 2.x Implementation)
 
 This repository provides the **TensorFlow 2.x** reimplementation of the model introduced in the CVPR 2020 paper:
 
 **Wide-Baseline Relative Camera Pose Estimation with Directional Learning**  
-*Kefan Chen, Noah Snavely, Ameesh Makadia*  
-Presented at **IEEE CVPR 2020**
+👨‍💻 *Kefan Chen, Noah Snavely, Ameesh Makadia*  
+📖 Presented at **IEEE CVPR 2020**
 
-- [arXiv Paper](https://arxiv.org/abs/2106.03336)  
-- [Original TensorFlow 1.x Repository](https://github.com/arthurchen0518/DirectionNet.git)  
+- 📄 [arXiv Paper](https://arxiv.org/abs/2106.03336)  
+- 💾 [Original TensorFlow 1.x Repository](https://github.com/arthurchen0518/DirectionNet.git)  
 
 ---
 
-## Environment Setup
+## ⚙️ Environment Setup
 
 To reproduce results and run the code, follow these steps:
 
-### 1) Create a new conda environment (Python 3.10.18 recommended)
+### 1️⃣ Create a new conda environment (Python 3.10.18 recommended)
 ```bash
 conda create -n <your_env_name> python=3.10.18
 ````
 
-### 2) Activate the environment
+### 2️⃣ Activate the environment
 ```bash
 conda activate <your_env_name>
 ````
-### 3) Install dependencies
+### 3️⃣ Install dependencies
 ```bash
    pip install tensorflow==2.15.1
    pip install keras==2.15.0
@@ -33,7 +33,7 @@ conda activate <your_env_name>
    pip install tensorflow-graphics==2021.12.3
 ````
 
-### 4) Install additional packages
+### 4️⃣ Install additional packages
 ```bash
    pip install -r requirements.txt
 ````
@@ -43,5 +43,5 @@ conda activate <your_env_name>
 ## 🚧 Status
 
 This repository is **actively under development** 🛠️✨  
-I continually update the code, improve the documentation, and add new features.  
+I continually update the code, improve the documentation 📝, and add new features 📝.  
 Stay tuned for more updates! 🔥📌
