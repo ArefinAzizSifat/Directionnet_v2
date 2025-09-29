@@ -241,3 +241,5 @@ def derotation(src_img,
         output_fov,
         output_shape)
 
+return (transformed_src, transformed_trt)
+
