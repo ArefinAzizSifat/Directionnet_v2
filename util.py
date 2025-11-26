@@ -20,18 +20,15 @@ import tensorflow as tf
 import tensorflow_probability as tfp
 from tensorflow_graphics.geometry.transformation import axis_angle
 from tensorflow_graphics.geometry.transformation import rotation_matrix_3d
-# Keep your original module structure/names
 from pano_utils import geometry
 from pano_utils import math_utils
 from pano_utils import transformation
 
 
 def read_pickle(file):
-    print(file)
     """Read from pickle files."""
     with open(file, 'rb') as f:
         loaded = pickle.load(f, encoding='bytes')
-        print("Loaded =============================")
     return list(loaded.keys()), list(loaded.values())
 
 

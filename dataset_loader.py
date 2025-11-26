@@ -1,9 +1,5 @@
-# dataset_loader_tf2.py
-# TF2-compatible reimplementation of dataset_loader.py
-# ----------------------------------------------------
 import os
 import collections
-import random
 
 import tensorflow as tf
 import util
@@ -17,7 +13,8 @@ flags.DEFINE_string('data_path', '', 'Directory where the data is stored')
 flags.DEFINE_integer('epochs', 10, 'Number of training epochs')
 flags.DEFINE_integer('batch_size', 2, 'Batch size')
 flags.DEFINE_boolean('training', True, 'Mode')
-flags.DEFINE_boolean('load_estimated_rot', False, 'TODO: investigate')
+flags.DEFINE_boolean('load_estimated_rot', False,
+                     'Whether to load estimated rotations from disk.')
 
 
 def data_loader(
@@ -96,10 +93,7 @@ def data_loader(
             image_bytes = tf.io.read_file(one_img_path)
             image = tf.image.decode_png(image_bytes, channels=3)
             image = tf.image.convert_image_dtype(image, tf.float32)
-            # original code: image.set_shape([512, 512, 3])
             image = tf.reshape(image, [512, 512, 3])
-
-            # tf.image.resize_area -> tf.image.resize(..., method=AREA)
             image = tf.image.resize(
                 image,
                 [256, 256],
@@ -127,21 +121,17 @@ def data_loader(
         src_image = load_single_image(src_path)
         trt_image = load_single_image(trt_path)
 
-        # Use TF random instead of Python random inside the dataset map
         if training:
             random_gamma = tf.random.uniform([], 0.7, 1.2)
             src_image = tf.image.adjust_gamma(src_image, random_gamma)
             trt_image = tf.image.adjust_gamma(trt_image, random_gamma)
 
-        # rotation: [9] -> [3,3]
         rotation = tf.reshape(rotation, [3, 3])
         rotation.set_shape([3, 3])
 
-        # translation: [3]
         translation = tf.reshape(translation, [3])
         translation.set_shape([3])
 
-        # fov: [1]
         fov = tf.reshape(fov, [1])
         fov.set_shape([1])
 
@@ -159,7 +149,6 @@ def data_loader(
             rotation_pred
         )
 
-    # ---------- Build the dataset pipeline -----------------------------------
     ds = tf.data.Dataset.list_files(os.path.join(data_path, '*'))
     ds = ds.flat_map(load_data)
 
@@ -168,23 +157,17 @@ def data_loader(
         num_parallel_calls=tf.data.AUTOTUNE
     )
 
-    # Ignore example-level errors (like corrupt files)
     ds = ds.apply(tf.data.experimental.ignore_errors())
 
     ds = ds.repeat(epochs)
-    # During evaluation we do not want to drop the last incomplete batch. Doing
-    # so would silently remove all examples if the dataset size is smaller than
-    # the batch size (a common case when running quick sanity checks), which
-    # then causes the iterator to raise an OutOfRangeError before any metrics
-    # can be computed. Restrict the "drop remainder" behaviour to training
-    # only, where a fixed batch shape is required for the TPU/GPUs.
+    # Keep final partial batches during evaluation to avoid silent drops that
+    # would raise OutOfRangeError before metrics update.
     ds = ds.batch(batch_size, drop_remainder=training)
     ds = ds.prefetch(tf.data.AUTOTUNE)
 
     return ds
 
 
-# ----- Tiny test entry point, similar to original main() ----------------------
 def main(argv=None):
     dataloader = data_loader(
         FLAGS.data_path,
